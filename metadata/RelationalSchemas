@@ -1,0 +1,4 @@
+Table Schemas -   
+USER(UserID, FirstName, LastName, EmailAddress)  
+TODO(TodoID, Description, ForDate, CompletedOn, UserID, CategoryID)  
+CATEGORY(CategoryID, Name)  
