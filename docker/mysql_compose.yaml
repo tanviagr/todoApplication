@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  mysqldb:
+    image: mysql:8.0
+    restart: always
+    container_name: todo_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todoDB
+      MYSQL_USER: atanvi_admin
+      MYSQL_PASSWORD: atanvi_root_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - mysqldb
+    image: phpmyadmin
+    restart: always
+    container_name: todo_db_ui
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: atanvi_admin
+      PMA_PASSWORD: atanvi_root_password
+
+volumes:
+  mysql-data:
+    driver: local
