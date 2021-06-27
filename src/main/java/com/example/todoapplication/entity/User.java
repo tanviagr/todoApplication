@@ -27,6 +27,10 @@ public class User
     @NotEmpty(message = "Date of Birth cannot be empty or null")
     private Date dob;
 
+    public User()
+    {
+    }
+
     public User(Integer userId, @NotEmpty(message = "First Name cannot be empty or null") String firstName, @NotEmpty(message = "Last Name cannot be empty or null") String lastName, @Email(message = "The email entered should be valid") String emailAddress, @NotEmpty(message = "Date of Birth cannot be empty or null") Date dob) {
         this.userId = userId;
         this.firstName = firstName;
