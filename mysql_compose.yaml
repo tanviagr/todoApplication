@@ -25,6 +25,17 @@ services:
       PMA_HOST: mysqldb
       PMA_USER: todos_user
       PMA_PASSWORD: todos_user_password
+  todos-app:
+    depends_on:
+      - phpmyadmin
+    image: todos-app
+    build:
+      context: .                          #docker file path (. means root directory)
+      dockerfile: Dockerfile              #docker file name
+    restart: always
+    container_name: todos-app-container
+    ports:
+      - 8080:8080
 volumes:
   mysql-data:
     driver: local
