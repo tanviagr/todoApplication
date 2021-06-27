@@ -4,6 +4,8 @@ services:
     image: mysql:8.0
     restart: always
     container_name: todo_db_container
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: todos_db
