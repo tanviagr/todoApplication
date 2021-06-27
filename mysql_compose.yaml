@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  mysqldb:
+    image: mysql:8.0
+    restart: always
+    container_name: todo_db_container
+    ports:
+      - 6033:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: todos_db
+      MYSQL_USER: todos_user
+      MYSQL_PASSWORD: todos_user_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - mysqldb
+    image: phpmyadmin
+    restart: always
+    container_name: todo_db_ui
+    ports:
+      - 8000:80
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: todos_user
+      PMA_PASSWORD: todos_user_password
+  todos-app:
+    depends_on:
+      - phpmyadmin
+    image: todos-app
+    build:
+      context: .                          #docker file path (. means root directory)
+      dockerfile: Dockerfile              #docker file name
+    restart: always
+    container_name: todos-app-container
+    ports:
+      - 8080:8080
+volumes:
+  mysql-data:
+    driver: local
