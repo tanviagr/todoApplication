@@ -3,12 +3,12 @@ services:
   mysqldb:
     image: mysql:8.0
     restart: always
-    container_name: todo_db
+    container_name: todo_db_container
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: todoDB
-      MYSQL_USER: atanvi_admin
-      MYSQL_PASSWORD: atanvi_root_password
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: todos_db
+      MYSQL_USER: todos_user
+      MYSQL_PASSWORD: todos_user_password
     volumes:
       - mysql-data:/var/lib/mysql
   phpmyadmin:
@@ -21,9 +21,8 @@ services:
       - 8080:80
     environment:
       PMA_HOST: mysqldb
-      PMA_USER: atanvi_admin
-      PMA_PASSWORD: atanvi_root_password
-
+      PMA_USER: todos_user
+      PMA_PASSWORD: todos_user_password
 volumes:
   mysql-data:
     driver: local
